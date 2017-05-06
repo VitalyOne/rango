@@ -1,0 +1,17 @@
+{%extends 'base.html'%}
+{%load staticfiles%}
+{%block title%}test{%endblock%}
+    {%block body_block%}
+    <form method="post" action="{%url 'test'%}">
+  {% csrf_token %} 
+  {{ form.as_p }}
+
+  <input type="submit" value="check" />
+ 
+</form>
+Ранее чекнутые значения: {%for val in last_val%}
+							{{val}}->
+						{%endfor%}
+
+
+    {%endblock%}

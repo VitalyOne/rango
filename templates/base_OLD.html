@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>{% block title %} Tango with django {% endblock %}</title>
+    </head>
+
+    <body>
+
+<div>
+    {% block body_block %}{% endblock %}
+</div>
+
+
+
+    <hr />
+
+        <div>
+        <ul>
+    	{% if user.is_authenticated %}
+    	   <li><h3> Hello, {{user.username}} </h3></li>
+    	   <!-- <li><a href="{% url 'logout_user'%}">Logout</a><br /></li> -->
+           <li><a href="{% url 'auth_logout'%}?next=/rango/">Logout</a><br /></li>
+           <li><a href="{%url 'add_category'%}">Add a New Category</a><br /></li>
+           <p>Change Password? <a href="{% url 'auth_password_change' %}">change it</a>!</p>
+    	{%else%}
+    	   <li><h3> Hello, anonimous </h3></li>
+    	   <!--<li><a href="{%url 'register'%}">Register now!</a><br /></li> -->
+           <a href="{%url 'registration_register'%}">Register now!</a><br /></li>
+          <!-- <li><a href="{%url 'login_user'%}">Login</a><br /></li> -->
+          <li><a href="{%url 'auth_login'%}">Login</a><br /></li>
+
+    	{%endif%}
+
+
+        
+        <li><a href="{%url 'about'%}">About</a><br /></li>
+        
+        </ul>
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,35 @@
+{%extends 'base.html'%}
+{%load staticfiles%}
+{%block title%}Rango{%endblock%}
+    {%block body_block%}
+    <div class="page-header">
+            {% if category %}
+                <h1> {{category_name}} </h1>
+                <p>{%if category.views%}
+                 данная категория была просмотрена{{category.views}} раз/а
+                {%endif%}</p>
+                {% if pages %}
+                    <ul>
+                    {% for page in pages %}
+                    <li><a href="{%url 'goto'%}?page_id={{page.id}}"> {{ page.title }}</a>
+                    {% if page.views %}
+                        ({{page.views}} views)
+                    {%endif%}
+        
+                    </li>
+                    {% endfor %}
+                    </ul>
+            
+            
+
+            {% else %}
+                    <strong>No pages to present in this category!</strong>
+            {% endif %}
+            <a href='/rango/category/{{ category_name_slug }}/add_page/'> Add new page </a>
+            
+
+            {% else %}
+                Category doesn't exist {{ category_name }}
+            {% endif %}
+            </div>
+    {%endblock%}

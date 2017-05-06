@@ -1,0 +1,58 @@
+{%extends 'base.html'%}
+{%load staticfiles%}
+{%block title%}Index {%endblock%}
+	{%block body_block%}
+
+	{%if user.is_authenticated%}
+
+	<div class="page-header">
+	<h1>Hello {{user.username}}!</h1>
+	{%else%}
+	<h1>Hello!</h1>
+	{%endif%}
+</div>
+
+		<div class="row placeholders">
+			<div class="col-xs-12 col-sm-6 placeholder">
+<div class="panel panel-primary">
+<div class="panel-heading">
+        <h3 class="panel-title">Most popular categories!</h3
+        </div>
+        	</div>
+        {%if categories%}
+      
+        	<ul clss="list-group">
+        	{%for c in categories%}
+        		<li class ="list-group-item">
+        		<strong><a href="{% url 'category' c.slug%}"> {{ c.name }}</a></strong><br />
+        		</li>
+        		
+        	{%endfor%}
+        	</ul>
+        	</div>
+        	<div class='col-xs-12 col-sm6 placeholder'>
+        	<div class="panel panel-primary">
+<div class="panel-heading">
+        <h3 class='panel-title'>Most viewed pages!</h3>
+        </div>
+        </div>
+        	{% if pages %}
+        		<ul class = "list-group">
+        		{% for p in pages %}
+        		<li class ="list-group-item"><strong>{{ p.title }}</strong> -------------- {{ p.views }} views</li>
+        		{% endfor %}
+        		</ul>
+
+        	{% else %}
+        	 No pages to present...
+        	 {% endif %}	
+        	 </div>
+        {% else %}
+        	<h1>There is no to present...</h1>
+        	
+        	<img src="{% static "images/1.jpeg" %}" alt="Picture of Rango" />
+        {%endif%}
+        <p>количество посещений: {{ visits }}</p>
+     </div>  
+        
+    {%endblock%}
